@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: s-creations-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    env:
+      - key: MONGODB_URI
+        value: your-mongodb-connection-string
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: your-netlify-app-url
