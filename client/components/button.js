@@ -1,36 +1,37 @@
 import styled from 'styled-components'
+import { theme } from '../styles/theme'
 
-export default function StatsCard({ title, value, icon, color }) {
+export default function Button({ children, primary, ...props }) {
   return (
-    <Card color={color}>
-      <Icon>{icon}</Icon>
-      <Title>{title}</Title>
-      <Value>{value}</Value>
-    </Card>
+    <StyledButton primary={primary} {...props}>
+      {children}
+    </StyledButton>
   )
 }
 
-const Card = styled.div`
-  background: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  border-top: 4px solid ${props => props.color};
-`
+const StyledButton = styled.button`
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-family: ${theme.fonts.main};
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: ${props => 
+    props.primary ? theme.colors.primary : 'transparent'};
+  color: ${props => 
+    props.primary ? 'white' : theme.colors.primary};
+  border: ${props => 
+    !props.primary && `2px solid ${theme.colors.primary}`};
 
-const Icon = styled.div`
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-`
+  &:hover {
+    background-color: ${props => 
+      props.primary ? theme.colors.secondary : theme.colors.primary};
+    color: white;
+  }
 
-const Title = styled.h3`
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-`
-
-const Value = styled.p`
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin: 0;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `
