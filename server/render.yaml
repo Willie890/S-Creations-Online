@@ -6,8 +6,12 @@ services:
     startCommand: node server.js
     env:
       - key: MONGODB_URI
-        value: your-mongodb-connection-string
+        value: mongodb+srv://<username>:<password>@cluster0.mongodb.net/s-creations?retryWrites=true&w=majority
       - key: JWT_SECRET
         generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 30d
       - key: CLIENT_URL
-        value: your-netlify-app-url
+        value: https://your-netlify-app.netlify.app
+      - key: NODE_ENV
+        value: production
