@@ -1,12 +1,25 @@
-import styled from 'styled-components'
-import { theme } from '../styles/theme'
+import styled from 'styled-components';
+import { theme } from '../../styles/theme';
 
-export default function Button({ children, primary, ...props }) {
+export default function Button({ 
+  children, 
+  primary, 
+  secondary, 
+  danger, 
+  fullWidth, 
+  ...props 
+}) {
   return (
-    <StyledButton primary={primary} {...props}>
+    <StyledButton 
+      primary={primary}
+      secondary={secondary}
+      danger={danger}
+      fullWidth={fullWidth}
+      {...props}
+    >
       {children}
     </StyledButton>
-  )
+  );
 }
 
 const StyledButton = styled.button`
@@ -17,21 +30,43 @@ const StyledButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: ${props => 
-    props.primary ? theme.colors.primary : 'transparent'};
-  color: ${props => 
-    props.primary ? 'white' : theme.colors.primary};
-  border: ${props => 
-    !props.primary && `2px solid ${theme.colors.primary}`};
-
-  &:hover {
-    background-color: ${props => 
-      props.primary ? theme.colors.secondary : theme.colors.primary};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: ${props => props.fullWidth ? '100%' : 'auto'};
+  
+  ${props => props.primary && `
+    background-color: ${theme.colors.primary};
     color: white;
-  }
-
+    
+    &:hover {
+      background-color: ${theme.colors.secondary};
+    }
+  `}
+  
+  ${props => props.secondary && `
+    background-color: transparent;
+    color: ${theme.colors.primary};
+    border: 2px solid ${theme.colors.primary};
+    
+    &:hover {
+      background-color: ${theme.colors.primary};
+      color: white;
+    }
+  `}
+  
+  ${props => props.danger && `
+    background-color: #dc3545;
+    color: white;
+    
+    &:hover {
+      background-color: #bb2d3b;
+    }
+  `}
+  
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.65;
     cursor: not-allowed;
   }
-`
+`;
