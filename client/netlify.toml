@@ -1,5 +1,6 @@
 [build]
-  command = "npm run build"
+  base = "client"
+  command = "npm install && npm run build"
   publish = "out"
 
 [[redirects]]
@@ -9,3 +10,4 @@
 
 [dev]
   framework = "next"
+  targetPort = 3000
