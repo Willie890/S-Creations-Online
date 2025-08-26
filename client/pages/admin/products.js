@@ -3,8 +3,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 import AdminLayout from '../../components/admin/AdminLayout';
 import ProductTable from '../../components/admin/ProductTable';
-import Button from '../../components/common/Button'; // Fixed import path
+import Button from '../../components/common/Button';
 import ProductModal from '../../components/admin/ProductModal';
+
+// ... rest of the code remains the same
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
