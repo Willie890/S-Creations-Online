@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import styled from 'styled-components'
-import { theme } from '../styles/theme'
-import Layout from '../components/Layout'
-import { useCart } from '../context/CartContext'
-import { useAuth } from '../context/AuthContext'
-import CheckoutForm from '../components/CheckoutForm'
-import OrderSummary from '../components/OrderSummary'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import { theme } from '../styles/theme';
+import Layout from '../components/Layout';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import CheckoutForm from '../components/CheckoutForm';
+import OrderSummary from '../components/OrderSummary';
+
+// ... rest of the code
 
 export default function CheckoutPage() {
   const { user } = useAuth()
