@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import Button from '../Button'
+import styled from 'styled-components';
+import Button from '../common/Button';
 
 export default function ProductTable({ products, onEdit, onDelete }) {
   return (
@@ -9,6 +9,7 @@ export default function ProductTable({ products, onEdit, onDelete }) {
           <th>Name</th>
           <th>Price</th>
           <th>Stock</th>
+          <th>Category</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -18,15 +19,16 @@ export default function ProductTable({ products, onEdit, onDelete }) {
             <td>{product.name}</td>
             <td>${product.price.toFixed(2)}</td>
             <td>{product.stock}</td>
+            <td>{product.category}</td>
             <td>
               <Button onClick={() => onEdit(product)}>Edit</Button>
-              <Button onClick={() => onDelete(product._id)}>Delete</Button>
+              <Button danger onClick={() => onDelete(product._id)}>Delete</Button>
             </td>
           </tr>
         ))}
       </tbody>
     </Table>
-  )
+  );
 }
 
 const Table = styled.table`
@@ -41,9 +43,10 @@ const Table = styled.table`
   
   th {
     background-color: #f5f5f5;
+    font-weight: 600;
   }
   
   button {
     margin-right: 0.5rem;
   }
-`
+`;
