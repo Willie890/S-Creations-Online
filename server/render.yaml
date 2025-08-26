@@ -2,8 +2,8 @@ services:
   - type: web
     name: s-creations-api
     runtime: node
-    buildCommand: npm install
-    startCommand: node server.js
+    buildCommand: cd server && npm install
+    startCommand: cd server && node server.js
     env:
       - key: MONGODB_URI
         value: mongodb+srv://<username>:<password>@cluster0.mongodb.net/s-creations?retryWrites=true&w=majority
@@ -15,3 +15,7 @@ services:
         value: https://your-netlify-app.netlify.app
       - key: NODE_ENV
         value: production
+    healthCheckPath: /api/health
+    scaling:
+      minInstances: 1
+      maxInstances: 3
