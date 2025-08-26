@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import styled from 'styled-components'
-import Button from '../Button'
+import { useState } from 'react';
+import styled from 'styled-components';
+import Button from '../common/Button'; // Fixed import path
 
 export default function ProductModal({ 
   isOpen, 
@@ -15,19 +15,19 @@ export default function ProductModal({
     category: product?.category || 'clothing',
     stock: product?.stock || 0,
     images: product?.images || ['']
-  })
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onSubmit(formData)
-  }
+    e.preventDefault();
+    onSubmit(formData);
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <ModalOverlay>
@@ -104,7 +104,7 @@ export default function ProductModal({
         </Form>
       </ModalContent>
     </ModalOverlay>
-  )
+  );
 }
 
 const ModalOverlay = styled.div`
@@ -118,7 +118,7 @@ const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-`
+`;
 
 const ModalContent = styled.div`
   background-color: white;
@@ -127,7 +127,7 @@ const ModalContent = styled.div`
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
-`
+`;
 
 const ModalHeader = styled.div`
   display: flex;
@@ -135,18 +135,18 @@ const ModalHeader = styled.div`
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #eee;
-`
+`;
 
 const CloseButton = styled.button`
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-`
+`;
 
 const Form = styled.form`
   padding: 1rem;
-`
+`;
 
 const FormGroup = styled.div`
   margin-bottom: 1rem;
@@ -163,6 +163,11 @@ const FormGroup = styled.div`
     border: 1px solid #ddd;
     border-radius: 4px;
   }
+  
+  textarea {
+    min-height: 100px;
+  }
+`;
   
   textarea {
     min-height: 100px;
