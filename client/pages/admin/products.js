@@ -1,52 +1,52 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import styled from 'styled-components'
-import AdminLayout from '../../components/admin/AdminLayout'
-import ProductTable from '../../components/admin/ProductTable'
-import Button from '../../components/Button'
-import ProductModal from '../../components/admin/ProductModal'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+import AdminLayout from '../../components/admin/AdminLayout';
+import ProductTable from '../../components/admin/ProductTable';
+import Button from '../../components/common/Button'; // Fixed import path
+import ProductModal from '../../components/admin/ProductModal';
 
 export default function AdminProducts() {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [currentProduct, setCurrentProduct] = useState(null)
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
 
   useEffect(() => {
-    fetchProducts()
-  }, [])
+    fetchProducts();
+  }, []);
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('/api/admin/products')
-      setProducts(res.data)
+      const res = await axios.get('/api/admin/products');
+      setProducts(res.data);
     } catch (err) {
-      console.error('Error fetching products:', err)
+      console.error('Error fetching products:', err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleEdit = (product) => {
-    setCurrentProduct(product)
-    setModalOpen(true)
-  }
+    setCurrentProduct(product);
+    setModalOpen(true);
+  };
 
   const handleCreate = () => {
-    setCurrentProduct(null)
-    setModalOpen(true)
-  }
+    setCurrentProduct(null);
+    setModalOpen(true);
+  };
 
   const handleDelete = async (productId) => {
     if (!confirm('Are you sure you want to delete this product?')) return
     
     try {
-      await axios.delete(`/api/admin/products/${productId}`)
-      setProducts(products.filter(p => p._id !== productId))
+      await axios.delete(`/api/admin/products/${productId}`);
+      setProducts(products.filter(p => p._id !== productId));
     } catch (err) {
-      console.error('Error deleting product:', err)
+      console.error('Error deleting product:', err);
     }
-  }
+  };
 
   const handleSubmit = async (productData) => {
     try {
@@ -55,20 +55,20 @@ export default function AdminProducts() {
         const res = await axios.put(
           `/api/admin/products/${currentProduct._id}`,
           productData
-        )
+        );
         setProducts(products.map(p => 
           p._id === currentProduct._id ? res.data : p
-        ))
+        ));
       } else {
         // Create new product
-        const res = await axios.post('/api/admin/products', productData)
-        setProducts([...products, res.data])
+        const res = await axios.post('/api/admin/products', productData);
+        setProducts([...products, res.data]);
       }
-      setModalOpen(false)
+      setModalOpen(false);
     } catch (err) {
-      console.error('Error saving product:', err)
+      console.error('Error saving product:', err);
     }
-  }
+  };
 
   return (
     <AdminLayout>
@@ -94,7 +94,7 @@ export default function AdminProducts() {
         product={currentProduct}
       />
     </AdminLayout>
-  )
+  );
 }
 
 const Header = styled.div`
@@ -105,6 +105,6 @@ const Header = styled.div`
 
   h1 {
     font-size: 1.8rem;
-    color: ${theme.colors.dark};
+    color: #2F4F4F;
   }
-`
+`;
