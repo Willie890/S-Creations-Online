@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../common/Button'; // Fixed import path
+import Button from '../common/Button';
 
 export default function ProductModal({ 
   isOpen, 
@@ -168,8 +168,3 @@ const FormGroup = styled.div`
     min-height: 100px;
   }
 `;
-  
-  textarea {
-    min-height: 100px;
-  }
-`
