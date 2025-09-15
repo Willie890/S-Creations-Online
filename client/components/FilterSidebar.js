@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import theme from '../../styles/theme'; // if inside components/ — or '../styles/theme' if in pages/
+import theme from '../styles/theme';
 
 export default function FilterSidebar({ categories, filters, setFilters }) {
   const [priceRange, setPriceRange] = useState(filters.priceRange);
