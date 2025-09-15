@@ -1,78 +1,71 @@
-import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+// client/components/common/Button.js
+'use client';
 
-export default function Button({ 
-  children, 
-  primary, 
-  secondary, 
-  danger, 
-  fullWidth, 
-  disabled,
-  ...props 
-}) {
-  return (
-    <StyledButton 
-      primary={primary}
-      secondary={secondary}
-      danger={danger}
-      fullWidth={fullWidth}
-      disabled={disabled}
-      {...props}
-    >
-      {children}
-    </StyledButton>
-  );
-}
+import React from 'react';
 
-const StyledButton = styled.button`
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  font-family: ${theme.fonts.main};
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: ${props => props.fullWidth ? '100%' : 'auto'};
-  opacity: ${props => props.disabled ? 0.6 : 1};
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-  
-  ${props => props.primary && `
-    background-color: ${theme.colors.primary};
-    color: white;
-    
-    &:hover:not(:disabled) {
-      background-color: ${theme.colors.secondary};
-      transform: translateY(-1px);
-    }
-  `}
-  
-  ${props => props.secondary && `
-    background-color: transparent;
-    color: ${theme.colors.primary};
-    border: 2px solid ${theme.colors.primary};
-    
-    &:hover:not(:disabled) {
-      background-color: ${theme.colors.primary};
-      color: white;
-      transform: translateY(-1px);
-    }
-  `}
-  
-  ${props => props.danger && `
-    background-color: ${theme.colors.error};
-    color: white;
-    
-    &:hover:not(:disabled) {
-      background-color: #dc2626;
-      transform: translateY(-1px);
-    }
-  `}
-  
-  &:disabled {
-    cursor: not-allowed;
+const Button = React.forwardRef(
+  (
+    {
+      children,
+      type = 'button',
+      variant = 'primary', // 'primary' | 'secondary' | 'outline' | 'danger' | 'success'
+      size = 'md',        // 'sm' | 'md' | 'lg'
+      fullWidth = false,
+      disabled = false,
+      onClick,
+      className = '',
+      ...props
+    },
+    ref
+  ) => {
+    // Base classes
+    const baseClasses =
+      'inline-flex items-center justify-center font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200';
+
+    // Variant classes
+    const variantClasses = {
+      primary:
+        'bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500 disabled:bg-blue-400',
+      secondary:
+        'bg-gray-600 hover:bg-gray-700 text-white focus:ring-gray-500 disabled:bg-gray-400',
+      outline:
+        'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-gray-500 disabled:bg-gray-50 disabled:text-gray-400',
+      danger:
+        'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 disabled:bg-red-400',
+      success:
+        'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500 disabled:bg-green-400',
+    };
+
+    // Size classes
+    const sizeClasses = {
+      sm: 'px-3 py-1.5 text-sm',
+      md: 'px-4 py-2 text-base',
+      lg: 'px-6 py-3 text-lg',
+    };
+
+    // Full width
+    const widthClass = fullWidth ? 'w-full' : '';
+
+    // Disabled
+    const disabledClass = disabled ? 'cursor-not-allowed opacity-70' : '';
+
+    const finalClassName = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${widthClass} ${disabledClass} ${className}`;
+
+    return (
+      <button
+        ref={ref}
+        type={type}
+        className={finalClassName}
+        onClick={onClick}
+        disabled={disabled}
+        {...props}
+      >
+        {children}
+      </button>
+    );
   }
-`;
+);
+
+Button.displayName = 'Button';
+
+export default Button;
