@@ -1,20 +1,18 @@
+// client/pages/_app.js
 import { AuthProvider } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles/theme';
 import GlobalStyles from '../styles/GlobalStyles';
+import '../styles/globals.css'; // if you have this
 
-function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <GlobalStyles />
       <AuthProvider>
         <CartProvider>
           <Component {...pageProps} />
         </CartProvider>
       </AuthProvider>
-    </ThemeProvider>
+    </>
   );
 }
-
-export default MyApp;
