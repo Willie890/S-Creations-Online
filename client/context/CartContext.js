@@ -72,6 +72,9 @@ function cartReducer(state, action) {
     case 'CLEAR_CART':
       return initialState;
 
+    case 'REPLACE_STATE':
+      return action.payload;
+
     default:
       return state;
   }
@@ -80,7 +83,7 @@ function cartReducer(state, action) {
 // Create Context
 const CartContext = createContext();
 
-// 👉 ONLY DECLARE useCart ONCE 👈
+// Custom Hook
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) {
@@ -89,25 +92,29 @@ export function useCart() {
   return context;
 }
 
-// Provider
+// Provider Component
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  // Load cart from localStorage on mount
+  // Load from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
-      const parsed = JSON.parse(savedCart);
-      // Replace entire cart state
-      dispatch({ type: 'REPLACE_STATE', payload: parsed });
+      try {
+        const parsed = JSON.parse(savedCart);
+        dispatch({ type: 'REPLACE_STATE', payload: parsed });
+      } catch (e) {
+        console.error('Failed to parse cart from localStorage', e);
+      }
     }
   }, []);
 
-  // Save cart to localStorage whenever state changes
+  // Save to localStorage on state change
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state));
   }, [state]);
 
+  // Actions
   const addItem = (item) => dispatch({ type: 'ADD_ITEM', payload: item });
   const removeItem = (id) => dispatch({ type: 'REMOVE_ITEM', payload: id });
   const updateQuantity = (id, quantity) =>
@@ -124,4 +131,6 @@ export function CartProvider({ children }) {
     clearCart,
   };
 
-  return <
+  // ✅ FIXED: Properly closed JSX tag
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+}
