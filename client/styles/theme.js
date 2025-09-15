@@ -1,15 +1,15 @@
 // client/styles/theme.js
 
-// 👇 Named exports — for future use or named imports
+// 👇 NAMED EXPORTS — for future use
 export const colors = {
-  primary: '#3b82f6',     // blue-500
-  secondary: '#6b7280',   // gray-500
-  success: '#10b981',     // emerald-500
-  danger: '#ef4444',      // red-500
-  warning: '#f59e0b',     // amber-500
-  info: '#3b82f6',        // blue-500
-  light: '#f9fafb',       // gray-50
-  dark: '#111827',        // gray-900
+  primary: '#3b82f6',
+  secondary: '#6b7280',
+  success: '#10b981',
+  danger: '#ef4444',
+  warning: '#f59e0b',
+  info: '#3b82f6',
+  light: '#f9fafb',
+  dark: '#111827',
 };
 
 export const spacing = {
@@ -40,8 +40,7 @@ export const shadows = {
   lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
 };
 
-// 👇 DEFAULT EXPORT — This fixes your build!
-// Now `import theme from '../styles/theme'` works again.
+// ✅ 👇 THIS IS THE KEY — DEFAULT EXPORT
 const theme = {
   colors,
   spacing,
@@ -50,4 +49,4 @@ const theme = {
   shadows,
 };
 
-export default theme;
+export default theme; // ✅ This fixes ALL your import errors
