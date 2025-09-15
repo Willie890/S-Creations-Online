@@ -236,3 +236,10 @@ const PaymentMethod = styled.label`
     border-color: ${theme.colors.primary};
     background-color: ${theme.colors.primary}10;
   }
+`;
+
+const SubmitButton = styled.div`
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid ${theme.colors.gray[200]};
+`;
