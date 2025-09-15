@@ -1,6 +1,6 @@
 // client/styles/theme.js
 
-// 👇 NAMED EXPORTS — for future use
+// 👇 Named exports — for granular imports
 export const colors = {
   primary: '#3b82f6',
   secondary: '#6b7280',
@@ -40,7 +40,7 @@ export const shadows = {
   lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
 };
 
-// ✅ 👇 THIS IS THE KEY — DEFAULT EXPORT
+// ✅ 👇 THIS IS THE KEY — DEFAULT EXPORT for backward compatibility
 const theme = {
   colors,
   spacing,
@@ -49,4 +49,4 @@ const theme = {
   shadows,
 };
 
-export default theme; // ✅ This fixes ALL your import errors
+export default theme; // ✅ Now `import theme from '../styles/theme'` works!
