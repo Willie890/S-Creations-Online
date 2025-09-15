@@ -1,6 +1,6 @@
 // client/styles/theme.js
 
-// Named exports (for future use / named imports)
+// 👇 Named exports — for future use or named imports
 export const colors = {
   primary: '#3b82f6',     // blue-500
   secondary: '#6b7280',   // gray-500
@@ -40,7 +40,8 @@ export const shadows = {
   lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
 };
 
-// 👇 DEFAULT EXPORT — fixes "Attempted import error: 'theme' is not exported"
+// 👇 DEFAULT EXPORT — This fixes your build!
+// Now `import theme from '../styles/theme'` works again.
 const theme = {
   colors,
   spacing,
