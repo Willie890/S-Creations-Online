@@ -9,9 +9,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Set axios base URL and withCredentials
   useEffect(() => {
-    axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
+    axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
     axios.defaults.withCredentials = true;
   }, []);
 
@@ -24,7 +23,6 @@ export function AuthProvider({ children }) {
           return;
         }
 
-        // Set authorization header
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
         const res = await axios.get('/auth/me');
@@ -48,7 +46,6 @@ export function AuthProvider({ children }) {
       localStorage.setItem('token', res.data.token);
       setUser(res.data.user);
       
-      // Set authorization header for future requests
       axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
       
       router.push('/shop');
@@ -69,7 +66,6 @@ export function AuthProvider({ children }) {
       localStorage.setItem('token', res.data.token);
       setUser(res.data.user);
       
-      // Set authorization header for future requests
       axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
       
       router.push('/shop');
