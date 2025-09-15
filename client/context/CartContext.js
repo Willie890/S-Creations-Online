@@ -80,7 +80,7 @@ function cartReducer(state, action) {
 // Create Context
 const CartContext = createContext();
 
-// Custom Hook
+// 👉 ONLY DECLARE useCart ONCE 👈
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) {
@@ -97,7 +97,9 @@ export function CartProvider({ children }) {
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
-      dispatch({ type: 'REPLACE_CART', payload: JSON.parse(savedCart) });
+      const parsed = JSON.parse(savedCart);
+      // Replace entire cart state
+      dispatch({ type: 'REPLACE_STATE', payload: parsed });
     }
   }, []);
 
@@ -122,9 +124,4 @@ export function CartProvider({ children }) {
     clearCart,
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
-
-export function useCart() {
-  return useContext(CartContext);
-}
+  return <
