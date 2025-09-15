@@ -1,0 +1,13 @@
+[build]
+  base = "client"
+  command = "npm install && npm run build"
+  publish = "out"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  framework = "next"
+  targetPort = 3000
