@@ -1,6 +1,7 @@
 [build]
-  publish = "out"
+  base = "client"
   command = "npm install && npm run build"
+  publish = "out"
 
 [[redirects]]
   from = "/*"
