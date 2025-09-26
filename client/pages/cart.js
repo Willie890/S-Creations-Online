@@ -7,16 +7,19 @@ export default function Cart() {
   const router = useRouter();
 
   useEffect(() => {
-    const temp = localStorage.getItem('tempCart');
-    if (temp) setCart(JSON.parse(temp));
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    fetch('/api/cart', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(setCart);
   }, []);
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const total = cart.reduce((sum, item) => sum + item.product.price * item.qty, 0);
 
   const checkout = () => {
     if (cart.length === 0) return;
-    // In real app: POST to /api/checkout
-    localStorage.setItem('checkoutCart', JSON.stringify(cart));
     router.push('/checkout');
   };
 
@@ -34,11 +37,11 @@ export default function Cart() {
               padding: '1.5rem',
               borderBottom: '1px solid #eee',
             }}>
-              <img src={item.image} alt={item.name} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+              <img src={item.product.image} alt={item.product.name} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
               <div style={{ flex: 1 }}>
-                <h3>{item.name}</h3>
+                <h3>{item.product.name}</h3>
                 <p>Size: {item.size} | Qty: {item.qty}</p>
-                <p style={{ color: '#C9A9A6' }}>${(item.price * item.qty).toFixed(2)}</p>
+                <p style={{ color: '#C9A9A6' }}>${(item.product.price * item.qty).toFixed(2)}</p>
               </div>
             </div>
           ))}
