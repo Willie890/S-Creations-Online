@@ -1,18 +1,20 @@
 // client/pages/_app.js
-import { AuthProvider } from '../context/AuthContext';
-import { CartProvider } from '../context/CartContext';
-import GlobalStyles from '../styles/globals.css';
-import '../styles/globals.css';
+import '../styles/globals.css'; // ✅ Import CSS file
+import { ThemeProvider } from 'styled-components';
+
+// Optional: if you use styled-components global styles, create a separate file
+// import GlobalStyles from '../styles/StyledGlobalStyles';
+
+const theme = {
+  primary: '#4A6B3A',
+  secondary: '#D8B4E2',
+};
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
-      <GlobalStyles />
-      <AuthProvider>
-        <CartProvider>
-          <Component {...pageProps} />
-        </CartProvider>
-      </AuthProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      {/* {GlobalStyles && <GlobalStyles />} */}
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
