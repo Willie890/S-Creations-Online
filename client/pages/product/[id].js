@@ -1,27 +1,39 @@
 // client/pages/product/[id].js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { products } from '../../utils/products';
 
-export default function Product() {
+export default function ProductPage() {
   const router = useRouter();
   const { id } = router.query;
-  const product = products.find(p => p.id === parseInt(id));
+  const [product, setProduct] = useState(null);
   const [size, setSize] = useState('');
   const [qty, setQty] = useState(1);
 
-  if (!product) return <p style={{ textAlign: 'center', padding: '3rem' }}>Product not found.</p>;
+  useEffect(() => {
+    if (!id) return;
+    fetch(`/api/products/${id}`)
+      .then(res => res.json())
+      .then(setProduct);
+  }, [id]);
 
   const addToCart = async () => {
-    if (!size) return alert('Please select a size.');
-    
-    const item = { ...product, size, qty };
-    
-    // In real app: send to /api/cart
-    localStorage.setItem('tempCart', JSON.stringify([item]));
-    alert('Added to cart! (Demo mode)');
-    router.push('/cart');
+    const token = localStorage.getItem('token');
+    if (!token) return alert('Please log in to add to cart.');
+
+    const res = await fetch('/api/cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({ productId: id, size, qty }),
+    });
+    if (res.ok) {
+      alert('Added to cart!');
+      router.push('/cart');
+    } else {
+      alert('Failed to add to cart');
+    }
   };
+
+  if (!product) return <p style={{ textAlign: 'center', padding: '3rem' }}>Loading...</p>;
 
   return (
     <div className="container" style={{ padding: '3rem 0' }}>
