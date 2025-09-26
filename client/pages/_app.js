@@ -8,9 +8,8 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // In real app: verify token with /api/auth/me
-      const admin = localStorage.getItem('isAdmin') === 'true';
-      setUser({ isAdmin: admin });
+      const isAdmin = localStorage.getItem('isAdmin') === 'true';
+      setUser({ isAdmin });
     }
   }, []);
 
