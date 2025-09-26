@@ -8,19 +8,20 @@ export default function Checkout() {
   const router = useRouter();
 
   const placeOrder = async () => {
-    if (!delivery || !payment) return alert('Select all options.');
-    
-    // In real app: POST to /api/orders
-    const order = {
-      items: JSON.parse(localStorage.getItem('checkoutCart') || '[]'),
-      delivery,
-      payment,
-      status: 'processing',
-      createdAt: new Date().toISOString(),
-    };
-    
-    localStorage.setItem('lastOrder', JSON.stringify(order));
-    router.push('/order-confirmation');
+    const token = localStorage.getItem('token');
+    if (!token || !delivery || !payment) return alert('Complete all fields.');
+
+    const res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({ delivery, payment }),
+    });
+
+    if (res.ok) {
+      router.push('/order-confirmation');
+    } else {
+      alert('Order failed');
+    }
   };
 
   return (
