@@ -1,9 +1,8 @@
-// next.config.js
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  experimental: {
-    cacheHandler: './cache-handler.js',
-  },
+  // Optional: if you want trailing slashes (e.g., /shop/ instead of /shop)
+  // trailingSlash: true,
 };
 
 export default nextConfig;
