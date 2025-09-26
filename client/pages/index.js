@@ -8,7 +8,6 @@ export default function Home() {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#FFF9F5',
-      color: '#5A4A42',
       textAlign: 'center',
       padding: '2rem',
     }}>
