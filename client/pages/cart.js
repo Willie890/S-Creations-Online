@@ -1,6 +1,7 @@
 // client/pages/cart.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { API_BASE } from '../utils/api';
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
@@ -9,14 +10,15 @@ export default function Cart() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return;
-    fetch('/api/cart', {
+    fetch(`${API_BASE}/api/cart`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())
-      .then(setCart);
+      .then(setCart)
+      .catch(() => alert('Failed to load cart'));
   }, []);
 
-  const total = cart.reduce((sum, item) => sum + item.product.price * item.qty, 0);
+  const total = cart.reduce((sum, item) => sum + (item.product?.price || 0) * item.qty, 0);
 
   const checkout = () => {
     if (cart.length === 0) return;
