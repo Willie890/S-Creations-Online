@@ -1,7 +1,7 @@
 // pages/product/[id].js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { products } from '../../utils/products';
+import { products } from '../utils/products';
 
 export default function ProductPage() {
   const router = useRouter();
