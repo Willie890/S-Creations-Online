@@ -1,59 +1,41 @@
-// client/styles/GlobalStyles.js
-'use client';
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-import { createGlobalStyle } from 'styled-components';
+body {
+  background-color: #E6D5F0; /* Lavender */
+  color: #4A6B3A; /* Olive Green */
+  font-family: 'Arial', sans-serif;
+}
 
-const GlobalStyles = createGlobalStyle`
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+h1, h2, h3, h4, h5, h6 {
+  color: #4A6B3A;
+}
 
-  html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-  }
+a {
+  color: #4A6B3A;
+  text-decoration: underline;
+}
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    line-height: 1.6;
-    color: #111827;
-    background-color: #ffffff;
-    min-height: 100vh;
-  }
+button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 0.5rem 0;
-    line-height: 1.2;
-    font-weight: 700;
-  }
+/* Custom button styles */
+.btn-primary {
+  background-color: #4A6B3A;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
 
-  p {
-    margin: 0 0 1rem 0;
-  }
-
-  a {
-    color: #3b82f6;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
-  }
-
-  input, button, textarea, select {
-    font: inherit;
-  }
-
-  button {
-    cursor: pointer;
-  }
-`;
-
-export default GlobalStyles;
+.btn-secondary {
+  background-color: #D8B4E2;
+  color: #4A6B3A;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
