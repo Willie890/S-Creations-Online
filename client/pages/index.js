@@ -1,5 +1,5 @@
 // client/pages/index.js
-export default function HomePage() {
+export default function Home() {
   return (
     <div style={{
       minHeight: '100vh',
@@ -7,37 +7,23 @@ export default function HomePage() {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#E6D5F0',
-      color: '#4A6B3A',
-      fontFamily: 'Arial, sans-serif',
+      backgroundColor: '#FFF9F5',
+      color: '#5A4A42',
       textAlign: 'center',
       padding: '2rem',
-      boxSizing: 'border-box',
     }}>
-      <h1 style={{ fontSize: '2.8rem', marginBottom: '1.2rem', fontWeight: 'normal' }}>
+      <h1 style={{ fontSize: '2.8rem', marginBottom: '1rem', fontFamily: 'cursive' }}>
         🌸 Welcome to S-Creations Online
       </h1>
-      <p style={{ fontSize: '1.3rem', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: 1.5 }}>
-        Handcrafted treasures made with love, just for you.
+      <p style={{ fontSize: '1.2rem', marginBottom: '2rem', maxWidth: '600px' }}>
+        Handcrafted treasures, made with love and care — just for you.
       </p>
-      <a
-        href="/shop"
-        style={{
-          padding: '0.85rem 2rem',
-          backgroundColor: '#4A6B3A',
-          color: 'white',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          fontSize: '1.2rem',
-          fontWeight: 'bold',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-          transition: 'transform 0.2s',
-        }}
-        onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-      >
-        Start Shopping →
-      </a>
+      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <a href="/signup" className="btn">Create Account</a>
+        <a href="/shop" className="btn" style={{ backgroundColor: '#C9A9A6', color: '#5A4A42' }}>
+          Browse Collection
+        </a>
+      </div>
     </div>
   );
 }
