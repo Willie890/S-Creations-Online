@@ -1,6 +1,7 @@
 // client/pages/login.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { API_BASE } from '../utils/api';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -9,19 +10,22 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (res.ok) {
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('isAdmin', data.user.isAdmin);
-      alert('Login successful!');
-      router.push(data.user.isAdmin ? '/admin' : '/shop');
-    } else {
-      alert(data.message || 'Login failed');
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('isAdmin', data.user.isAdmin);
+        router.push(data.user.isAdmin ? '/admin' : '/shop');
+      } else {
+        alert(data.message || 'Login failed');
+      }
+    } catch (err) {
+      alert('Network error. Please try again.');
     }
   };
 
