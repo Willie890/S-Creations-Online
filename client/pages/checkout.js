@@ -1,6 +1,7 @@
 // client/pages/checkout.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { API_BASE } from '../utils/api';
 
 export default function Checkout() {
   const [delivery, setDelivery] = useState('');
@@ -11,16 +12,24 @@ export default function Checkout() {
     const token = localStorage.getItem('token');
     if (!token || !delivery || !payment) return alert('Complete all fields.');
 
-    const res = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({ delivery, payment }),
-    });
+    try {
+      const res = await fetch(`${API_BASE}/api/orders`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify({ delivery, payment }),
+      });
 
-    if (res.ok) {
-      router.push('/order-confirmation');
-    } else {
-      alert('Order failed');
+      if (res.ok) {
+        router.push('/order-confirmation');
+      } else {
+        const err = await res.json();
+        alert(err.message || 'Order failed');
+      }
+    } catch (err) {
+      alert('Network error');
     }
   };
 
