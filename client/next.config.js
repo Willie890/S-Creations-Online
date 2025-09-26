@@ -1,7 +1,8 @@
+// client/next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // Optional: if you want trailing slashes (e.g., /shop/ instead of /shop)
+  // Optional: uncomment if you want trailing slashes
   // trailingSlash: true,
 };
 
