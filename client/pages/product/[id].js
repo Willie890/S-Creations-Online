@@ -1,6 +1,7 @@
 // client/pages/product/[id].js
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { API_BASE } from '../../utils/api';
 
 export default function ProductPage() {
   const router = useRouter();
@@ -11,25 +12,34 @@ export default function ProductPage() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`/api/products/${id}`)
+    fetch(`${API_BASE}/api/products/${id}`)
       .then(res => res.json())
-      .then(setProduct);
+      .then(setProduct)
+      .catch(() => alert('Product not found'));
   }, [id]);
 
   const addToCart = async () => {
     const token = localStorage.getItem('token');
     if (!token) return alert('Please log in to add to cart.');
 
-    const res = await fetch('/api/cart', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({ productId: id, size, qty }),
-    });
-    if (res.ok) {
-      alert('Added to cart!');
-      router.push('/cart');
-    } else {
-      alert('Failed to add to cart');
+    try {
+      const res = await fetch(`${API_BASE}/api/cart`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify({ productId: id, size, qty }),
+      });
+      if (res.ok) {
+        alert('Added to cart!');
+        router.push('/cart');
+      } else {
+        const err = await res.json();
+        alert(err.message || 'Failed to add to cart');
+      }
+    } catch (err) {
+      alert('Network error');
     }
   };
 
