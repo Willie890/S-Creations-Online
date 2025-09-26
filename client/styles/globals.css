@@ -1,16 +1,22 @@
+/* client/styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-white text-gray-900;
+  background-color: #E6D5F0; /* Lavender */
+  color: #4A6B3A; /* Olive Green */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+a {
+  color: #4A6B3A;
+  text-decoration: underline;
 }
 
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+button {
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
