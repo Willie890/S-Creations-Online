@@ -1,73 +1,108 @@
-// client/pages/[id].js
-import Layout from '../components/Layout';
-import ProductCard from '../components/ProductCard';
-import theme from '../styles/theme';
+// pages/product/[id].js
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { products } from '../../utils/products';
 
-const products = [
-  { id: 1, name: 'Product 1', price: 29.99, image: '/product1.jpg', description: 'This is product 1 description.' },
-  { id: 2, name: 'Product 2', price: 49.99, image: '/product2.jpg', description: 'This is product 2 description.' },
-  { id: 3, name: 'Product 3', price: 19.99, image: '/product3.jpg', description: 'This is product 3 description.' },
-];
+export default function ProductPage() {
+  const router = useRouter();
+  const { id } = router.query;
+  const product = products.find(p => p.id === parseInt(id));
 
-export default function ProductPage({ params }) {
-  const product = products.find((p) => p.id === parseInt(params.id));
+  const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
-  if (!product) {
-    return (
-      <Layout>
-        <div style={{ textAlign: 'center', padding: theme.spacing.xl }}>
-          <h1>Product Not Found</h1>
-          <p>The product you're looking for doesn't exist.</p>
-        </div>
-      </Layout>
-    );
-  }
+  if (!product) return <p>Loading...</p>;
+
+  const addToCart = () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingItem = cart.find(item => item.id === product.id && item.size === selectedSize);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({ ...product, size: selectedSize, quantity });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`Added ${quantity}x ${product.name} (${selectedSize}) to cart!`);
+  };
 
   return (
-    <Layout>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: theme.spacing.xl, padding: theme.spacing.md }}>
-        <div>
-          <img
-            src={product.image}
-            alt={product.name}
-            style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: theme.borderRadius.md }}
-          />
-        </div>
-        <div>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: theme.spacing.md }}>{product.name}</h1>
-          <p style={{ fontSize: '1.5rem', color: theme.colors.primary, fontWeight: 'bold', marginBottom: theme.spacing.md }}>
-            ${product.price.toFixed(2)}
-          </p>
-          <p style={{ marginBottom: theme.spacing.lg }}>{product.description}</p>
+    <div style={{
+      padding: '2rem',
+      backgroundColor: '#E6D5F0',
+      fontFamily: 'Arial, sans-serif',
+    }}>
+      <Link href="/shop" style={{ color: '#4A6B3A', textDecoration: 'underline' }}>← Back to Shop</Link>
+      <div style={{
+        display: 'flex',
+        gap: '2rem',
+        marginTop: '1rem',
+        flexWrap: 'wrap',
+      }}>
+        <img src={product.image} alt={product.name} style={{
+          width: '300px',
+          height: '300px',
+          objectFit: 'cover',
+          borderRadius: '10px',
+        }} />
+        <div style={{
+          flex: 1,
+          minWidth: '300px',
+        }}>
+          <h1 style={{ color: '#4A6B3A' }}>{product.name}</h1>
+          <p style={{ color: '#D8B4E2', fontWeight: 'bold', fontSize: '1.2rem' }}>${product.price}</p>
+          <p>{product.description}</p>
+
+          <div style={{ marginTop: '1rem' }}>
+            <label style={{ display: 'block', marginBottom: '0.5rem' }}>Select Size:</label>
+            <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)} style={{
+              padding: '0.5rem',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+              width: '100%',
+            }}>
+              <option value="">Choose a size</option>
+              {product.sizes.map(size => (
+                <option key={size} value={size}>{size}</option>
+              ))}
+            </select>
+          </div>
+
+          <div style={{ marginTop: '1rem' }}>
+            <label style={{ display: 'block', marginBottom: '0.5rem' }}>Quantity:</label>
+            <input
+              type="number"
+              min="1"
+              value={quantity}
+              onChange={(e) => setQuantity(parseInt(e.target.value))}
+              style={{
+                width: '100px',
+                padding: '0.5rem',
+                borderRadius: '5px',
+                border: '1px solid #ccc',
+              }}
+            />
+          </div>
+
           <button
+            onClick={addToCart}
+            disabled={!selectedSize}
             style={{
-              backgroundColor: theme.colors.primary,
+              marginTop: '1rem',
+              padding: '0.75rem 1.5rem',
+              backgroundColor: '#4A6B3A',
               color: 'white',
               border: 'none',
-              padding: theme.spacing.md,
-              borderRadius: theme.borderRadius.sm,
+              borderRadius: '8px',
               cursor: 'pointer',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
+              opacity: selectedSize ? 1 : 0.5,
             }}
           >
             Add to Cart
           </button>
         </div>
       </div>
-    </Layout>
+    </div>
   );
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: products.map((product) => ({ params: { id: product.id.toString() } })),
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  return {
-    props: { params },
-  };
 }
