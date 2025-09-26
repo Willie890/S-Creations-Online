@@ -1,5 +1,6 @@
 // client/pages/admin/products.js
 import { useEffect, useState } from 'react';
+import { API_BASE } from '../../utils/api';
 
 export default function AdminProducts({ user }) {
   const [products, setProducts] = useState([]);
@@ -12,15 +13,18 @@ export default function AdminProducts({ user }) {
 
   useEffect(() => {
     if (!user?.isAdmin) return;
-    fetch('/api/products', {
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    const token = localStorage.getItem('token');
+    fetch(`${API_BASE}/api/products`, {
+      headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())
-      .then(setProducts);
+      .then(setProducts)
+      .catch(() => alert('Failed to load products'));
   }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
     const newProduct = {
       name,
       price: parseFloat(price),
@@ -30,17 +34,21 @@ export default function AdminProducts({ user }) {
       description,
     };
 
-    await fetch('/api/products', {
+    await fetch(`${API_BASE}/api/products`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}` 
+      },
       body: JSON.stringify(newProduct),
     });
 
     // Reset form
     setName(''); setPrice(''); setImage(''); setCategory(''); setSizes(''); setDescription('');
-    // Refresh list
-    fetch('/api/products', {
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    // Refresh
+    const token2 = localStorage.getItem('token');
+    fetch(`${API_BASE}/api/products`, {
+      headers: { 'Authorization': `Bearer ${token2}` }
     }).then(res => res.json()).then(setProducts);
   };
 
