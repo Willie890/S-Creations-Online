@@ -1,29 +1,43 @@
 // client/pages/index.js
-import Layout from '../components/Layout';
-import ProductCard from '../components/ProductCard';
-import theme from '../styles/theme';
-
-const products = [
-  { id: 1, name: 'Product 1', price: 29.99, image: '/product1.jpg' },
-  { id: 2, name: 'Product 2', price: 49.99, image: '/product2.jpg' },
-  { id: 3, name: 'Product 3', price: 19.99, image: '/product3.jpg' },
-];
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <Layout>
-      <div style={{ textAlign: 'center', marginBottom: theme.spacing.xl }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: theme.spacing.md }}>Welcome to S-Creations</h1>
-        <p style={{ fontSize: '1.2rem', color: theme.colors.secondary }}>
-          Discover our amazing collection of products
-        </p>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: theme.spacing.lg }}>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    </Layout>
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#E6D5F0',
+      color: '#4A6B3A',
+      fontFamily: 'Arial, sans-serif',
+      textAlign: 'center',
+      padding: '2rem',
+      boxSizing: 'border-box',
+    }}>
+      <h1 style={{ fontSize: '2.8rem', marginBottom: '1.2rem', fontWeight: 'normal' }}>
+        🌸 Welcome to S-Creations Online
+      </h1>
+      <p style={{ fontSize: '1.3rem', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: 1.5 }}>
+        Handcrafted treasures made with love, just for you.
+      </p>
+      <a
+        href="/shop"
+        style={{
+          padding: '0.85rem 2rem',
+          backgroundColor: '#4A6B3A',
+          color: 'white',
+          textDecoration: 'none',
+          borderRadius: '10px',
+          fontSize: '1.2rem',
+          fontWeight: 'bold',
+          boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+          transition: 'transform 0.2s',
+        }}
+        onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+      >
+        Start Shopping →
+      </a>
+    </div>
   );
 }
