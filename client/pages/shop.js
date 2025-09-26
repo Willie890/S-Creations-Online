@@ -1,14 +1,16 @@
 // client/pages/shop.js
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { API_BASE } from '../utils/api';
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch(`${API_BASE}/api/products`)
       .then(res => res.json())
-      .then(setProducts);
+      .then(setProducts)
+      .catch(() => alert('Failed to load products'));
   }, []);
 
   return (
