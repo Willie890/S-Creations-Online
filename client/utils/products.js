@@ -2,29 +2,20 @@
 export const products = [
   {
     id: 1,
-    name: "Floral Tote Bag",
-    price: 29.99,
-    image: "/images/tote-bag.jpg",
-    category: "Accessories",
-    sizes: ["Small", "Medium", "Large"],
-    description: "Handmade tote bag with floral embroidery."
+    name: "Embroidered Tote Bag",
+    price: 32.99,
+    image: "/images/tote.jpg",
+    category: "Bags",
+    sizes: ["One Size"],
+    description: "Hand-stitched floral design on organic cotton."
   },
   {
     id: 2,
-    name: "Butterfly Necklace",
-    price: 19.99,
-    image: "/images/necklace.jpg",
+    name: "Pearl Drop Earrings",
+    price: 24.50,
+    image: "/images/earrings.jpg",
     category: "Jewelry",
     sizes: ["One Size"],
-    description: "Delicate butterfly pendant on a rose gold chain."
-  },
-  {
-    id: 3,
-    name: "Lavender Candle",
-    price: 14.99,
-    image: "/images/candle.jpg",
-    category: "Home",
-    sizes: ["One Size"],
-    description: "Soy wax candle with calming lavender scent."
-  },
+    description: "Freshwater pearls with rose gold posts."
+  }
 ];
