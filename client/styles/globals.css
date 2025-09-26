@@ -17,19 +17,26 @@ a:hover {
   text-decoration: underline;
 }
 
-button, .btn {
+.btn {
+  display: inline-block;
   background-color: #5A4A42;
   color: white;
-  border: none;
   padding: 0.6rem 1.2rem;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
-  transition: background-color 0.2s;
+  transition: background 0.2s;
 }
 
-button:hover, .btn:hover {
+.btn:hover {
   background-color: #8B7E7E;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #C9A9A6;
+  color: #5A4A42;
 }
 
 .container {
