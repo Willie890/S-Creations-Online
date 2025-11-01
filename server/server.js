@@ -1,15 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser'); // NEW
 const connectDB = require('./config/db');
+const cookieParser = require('cookie-parser'); // <--- ADDED
 
 // Import routes
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
 const checkoutRoutes = require('./routes/checkout');
 const cartRoutes = require('./routes/cart');
-const userRoutes = require('./routes/users'); // NEW
 
 // Import middleware (must be defined BEFORE use)
 const { protect } = require('./middleware/auth'); 
@@ -20,20 +19,25 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB();
 
+// Define the allowed origin for CORS
+const allowedOrigin = 'https://s-creations.netlify.app'; // <--- YOUR FRONTEND URL
+
 // Middleware
+// 1. Configure CORS with the specific origin and credentials
 app.use(cors({
-  credentials: true, // IMPORTANT for HttpOnly cookies
-  origin: 'https://s-creations-online.onrender.com' // Set to your frontend domain
+  origin: allowedOrigin,
+  credentials: true // Crucial for token/session/cookie exchange
 }));
+
 app.use(express.json());
-app.use(cookieParser()); // NEW: Use cookie parser
+// 2. Use cookie-parser
+app.use(cookieParser()); // <--- ADDED
 
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
-app.use('/api/checkout', protect, checkoutRoutes); // ADDED protect middleware
+app.use('/api/checkout', checkoutRoutes);
 app.use('/api/cart', protect, cartRoutes);
-app.use('/api/users', protect, userRoutes); // NEW
 
 // Health check
 app.get('/api/health', (req, res) => {
