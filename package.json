@@ -12,7 +12,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0",
-    "cookie-parser": "^1.4.6"  
+    "cookie-parser": "^1.4.6" <--- ADDED DEPENDENCY
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
