@@ -6,35 +6,28 @@ const API_BASE = 'https://s-creations-online.onrender.com/api';
 // ==============
 // UTILITIES
 // ==============
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-function setAuthToken(token) {
-  document.cookie = `token=${token}; path=/; max-age=86400`; // 1 day
-}
+/* REMOVED: getCookie and setAuthToken - Now using HttpOnly cookie */
 
 function clearAuth() {
-  document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+  // HttpOnly cookie can only be cleared by the server. 
+  // We only clear client-side data here.
   localStorage.removeItem('cart');
 }
 
 function apiFetch(url, options = {}) {
-  const token = getCookie('token');
+  // Rely on the browser to automatically send the HttpOnly cookie
   return fetch(`${API_BASE}${url}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...(token && { Authorization: `Bearer ${token}` }),
       ...options.headers
-    }
+    },
+    credentials: 'include' // NEW: Ensures the browser sends HttpOnly cookies
   });
 }
 
 // ==============
-// AUTH
+// AUTH (Only minor logic changes)
 // ==============
 async function handleLogin(email, password) {
   try {
@@ -45,7 +38,7 @@ async function handleLogin(email, password) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Login failed');
     
-    setAuthToken(data.token);
+    // Server now sets the HttpOnly cookie. We only handle redirection.
     if (data.role === 'admin') {
       window.location.href = '/admin.html';
     } else {
@@ -65,7 +58,7 @@ async function handleSignup(name, email, password) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Signup failed');
     
-    setAuthToken(data.token);
+    // Server now sets the HttpOnly cookie. We only handle redirection.
     window.location.href = '/';
   } catch (err) {
     alert(err.message);
