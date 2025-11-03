@@ -1,18 +1,13 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
-const userSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['user', 'admin'], default: 'user' }
+  description: String,
+  price: { type: Number, required: true },
+  // Storing category name as a string for simplicity with the Product/Category relationship
+  category: { type: String, required: true }, 
+  image: String,
+  badge: String // e.g., 'New', 'Sale', 'Limited Edition'
 }, { timestamps: true });
 
-// Pre-save hook to hash the password before saving
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 12);
-  next();
-});
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Product', productSchema);
