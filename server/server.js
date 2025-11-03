@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const cookieParser = require('cookie-parser'); // <--- 1. NEW IMPORT
+const cookieParser = require('cookie-parser'); // <--- 1. IMPORT
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -20,11 +20,10 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // Define the allowed origin for CORS
-// MUST be the exact URL of your Netlify frontend
 const allowedOrigin = 'https://s-creations.netlify.app'; // <--- 2. CORRECT URL
 
 // Middleware
-// 3. Configure CORS to allow your frontend's origin and credentials
+// 3. Configure CORS with the specific origin and credentials
 app.use(cors({
   origin: allowedOrigin,
   credentials: true 
@@ -32,7 +31,7 @@ app.use(cors({
 
 app.use(express.json());
 // 4. Use cookie-parser middleware
-app.use(cookieParser()); 
+app.use(cookieParser()); // <--- USE
 
 // API Routes
 app.use('/api/auth', authRoutes);
