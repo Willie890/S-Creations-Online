@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>S-Creations — Where Fashion Meets Art</title>
   <meta name="description" content="Discover handcrafted clothing, curated textiles, and studio-made accessories — designed for creatives who live color and craft." />
+  <!-- Link to the stylesheet (assuming it's available) -->
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -31,175 +32,108 @@
             <span class="navigation-link-text">Collections</span>
             <span class="navigation-link-accent"></span>
           </a>
-          <a href="/login.html" id="nav-auth-link" class="navigation-link">
-            <span class="navigation-link-text">Sign In</span>
+          <a href="/admin.html" id="admin-link" class="navigation-link navigation-link--hidden">
+            <span class="navigation-link-text">Admin</span>
             <span class="navigation-link-accent"></span>
           </a>
         </div>
-        <!-- Action Buttons -->
+        <!-- User & Cart Actions -->
         <div class="navigation-actions">
-          <a href="/cart.html" class="navigation-action-btn" aria-label="View shopping cart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="navigation-icon"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 19a2 2 0 1 0 4 0a2 2 0 0 0-4 0m11 0a2 2 0 1 0 4 0a2 2 0 0 0-4 0m-8.5-4h11.5c.78 0 1.48-.3 2-1L21 6H4"/></svg>
-            <span class="navigation-cart-count" id="cart-count">0</span>
+          <div class="navigation-auth-controls">
+            <a href="/login.html" id="login-link" class="btn btn-secondary btn-sm">Sign In</a>
+            <a href="/signup.html" id="signup-link" class="btn btn-primary btn-sm">Join</a>
+            <button id="logout-btn" class="btn btn-outline btn-sm navigation-auth-control--hidden">Log Out</button>
+          </div>
+          <a href="/cart.html" class="navigation-cart-link" aria-label="Shopping Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="navigation-cart-icon"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 19M17 19H7M17 17l-3.27-10.63a.5.5 0 0 0-.49-.37H6.76a.5.5 0 0 0-.49.37L3 17h14m0 0a2 2 0 1 0 2 2m-2-2a2 2 0 1 0-2-2m-9 2a2 2 0 1 0 2 2m-2-2a2 2 0 1 0-2-2"/></svg>
+            <span id="cart-count" class="navigation-cart-count">0</span>
           </a>
-          <button class="navigation-action-btn navigation-menu-toggle" aria-label="Toggle menu">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="navigation-icon navigation-icon--menu"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="navigation-icon navigation-icon--close hidden"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
-          </button>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile Menu (Hidden by default) -->
-  <div id="mobile-menu" class="mobile-menu-wrapper hidden">
-    <div class="mobile-menu-content">
-      <a href="#clothing" class="mobile-menu-link">Clothing</a>
-      <a href="#arts-crafts" class="mobile-menu-link">Arts & Crafts</a>
-      <a href="#collections" class="mobile-menu-link">Collections</a>
-      <a href="/login.html" id="mobile-auth-link" class="mobile-menu-link">Sign In</a>
-      <button id="mobile-logout-btn" class="mobile-menu-link mobile-menu-link--danger hidden">Log Out</button>
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero__container">
+      <div class="hero__content">
+        <h1 class="hero-title">Crafted Fashion. Artisan Soul.</h1>
+        <p class="hero-subtitle">Every piece is studio-made, every thread tells a story of color and meticulous craft.</p>
+        <div class="hero__actions">
+          <a href="#featured-products" class="btn btn-primary btn-lg">Shop Now</a>
+          <a href="#collections" class="btn btn-outline btn-lg">Discover Collections</a>
+        </div>
+      </div>
+      <div class="hero__image-wrapper">
+        <img src="https://placehold.co/600x400/6A5ACD/ffffff?text=Studio+Apparel" alt="Abstract fashion photography" class="hero__image" />
+      </div>
     </div>
-  </div>
+  </header>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero__container">
-        <div class="hero__content">
-          <h1 class="hero-title">Crafted with Soul. Designed for You.</h1>
-          <p class="hero-subtitle">Explore exclusive textile art and studio-made wearables from emerging South African designers.</p>
-          <div class="hero__actions">
-            <a href="#featured" class="btn btn-primary btn-lg">Shop Featured <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="margin-left: 0.5rem; transform: translateY(-1px);"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6"/></svg></a>
-            <a href="#collections" class="btn btn-outline btn-lg">View Collections</a>
-          </div>
-        </div>
-        <div class="hero__image-container">
-          <img src="https://placehold.co/600x400/6a5acd/ffffff?text=Artisan+Clothing" onerror="this.onerror=null;this.src='https://placehold.co/600x400/6a5acd/ffffff?text=Product+Hero';" alt="Image of artisan clothing and textiles on display" class="hero__image" loading="lazy" />
-        </div>
-      </div>
-    </section>
+  <!-- Featured Products Section -->
+  <section id="featured-products" class="featured-section">
+    <div class="featured-section__header">
+      <h2 class="section-title">✨ Featured Designs</h2>
+      <p class="section-subtitle">Our top-rated and latest creations.</p>
+    </div>
+    <div id="products-grid" class="products-grid">
+      <!-- Product cards will be loaded here by main.js -->
+      <p>Loading products...</p>
+    </div>
+    <div class="section-footer">
+      <a href="#" class="btn btn-secondary btn-lg">View All Products</a>
+    </div>
+  </section>
 
-    <!-- Featured Products Section -->
-    <section id="featured" class="featured-section">
-      <div class="section-header">
-        <h2 class="section-title">New Arrivals</h2>
-        <p class="section-subtitle">Handpicked textiles and accessories from our latest studio run.</p>
-      </div>
-      <div class="products-grid" id="featured-products-grid">
-        <!-- Product Cards Loaded by JS -->
-      </div>
-      <div class="section-footer">
-        <a href="#clothing" class="btn btn-secondary btn-lg">Browse All Products</a>
-      </div>
-    </section>
-
-    <!-- Categories Section -->
-    <section id="categories" class="categories-section">
-      <div class="section-header">
-        <h2 class="section-title">Shop By Category</h2>
-        <p class="section-subtitle">Find your next unique piece.</p>
-      </div>
-      <div class="categories-grid">
-        <a href="#clothing" class="category-tile category-tile--clothing">
-          <div class="category-tile__overlay"></div>
-          <div class="category-tile__content">
-            <h3 class="category-tile__title">Textile Wear</h3>
-            <p class="category-tile__count">24 Items</p>
-          </div>
-        </a>
-        <a href="#accessories" class="category-tile category-tile--accessories">
-          <div class="category-tile__overlay"></div>
-          <div class="category-tile__content">
-            <h3 class="category-tile__title">Studio Accessories</h3>
-            <p class="category-tile__count">15 Items</p>
-          </div>
-        </a>
-        <a href="#art" class="category-tile category-tile--art">
-          <div class="category-tile__overlay"></div>
-          <div class="category-tile__content">
-            <h3 class="category-tile__title">Fine Art Prints</h3>
-            <p class="category-tile__count">9 Items</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Promotional Banner Section -->
-    <section class="promo-section">
-      <div class="promo-slide">
-        <div class="promo-slide__image-container">
-          <img src="https://placehold.co/800x400/4ecdc4/ffffff?text=Sustainable+Design" onerror="this.onerror=null;this.src='https://placehold.co/800x400/4ecdc4/ffffff?text=Promo+Image';" alt="A close-up of sustainable woven fabric" class="promo-slide__image" loading="lazy" />
+  <!-- Categories Section -->
+  <section id="collections" class="categories-section">
+    <div class="featured-section__header">
+      <h2 class="section-title">Category Spotlight</h2>
+      <p class="section-subtitle">Explore by craft.</p>
+    </div>
+    <div class="categories-grid">
+      <a href="#" class="category-tile category-tile--style-1">
+        <div class="category-tile__content">
+          <h3 class="category-tile__title">Handwoven Textiles</h3>
+          <p class="category-tile__subtitle">Rich texture, vibrant color</p>
         </div>
-        <div class="promo-slide__content">
-          <span class="promo-slide__badge">Ethically Sourced</span>
-          <h2 class="promo-slide__title">Sustainable Craftsmanship</h2>
-          <p class="promo-slide__subtitle">We are committed to eco-friendly materials and fair trade practices in every piece.</p>
-          <a href="#" class="btn btn-outline-white">Learn More</a>
+      </a>
+      <a href="#" class="category-tile category-tile--style-2">
+        <div class="category-tile__content">
+          <h3 class="category-tile__title">Ceramic Accessories</h3>
+          <p class="category-tile__subtitle">Unique, sculptural pieces</p>
         </div>
+      </a>
+      <a href="#" class="category-tile category-tile--style-3">
+        <div class="category-tile__content">
+          <h3 class="category-tile__title">Vintage Repurposed</h3>
+          <p class="category-tile__subtitle">Sustainable style redefined</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Promotional Banner Section -->
+  <section class="promo-section">
+    <div class="promo-slide promo-slide--style-1">
+      <div class="promo-slide__content">
+        <h2 class="promo-slide__title">Get 15% Off Your First Order</h2>
+        <p class="promo-slide__subtitle">Join the creative community today and unlock exclusive early access to drops.</p>
+        <a href="/signup.html" class="btn btn-accent btn-lg">Sign Up Now</a>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="footer-wrapper">
+  <footer class="footer">
     <div class="footer-content-wrapper">
-      <div class="footer-columns-section">
-        <div class="footer-column footer-column--brand">
-          <a href="/" class="footer-brand-name">S-Creations</a>
-          <p class="footer-tagline">Where fashion meets craft and art.</p>
-          <div class="footer-social-links">
-            <a href="#" class="footer-social-link" aria-label="Visit us on Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.747 2.002H16.25c2.94 0 3.32.01 4.48 0c.937-.01 1.61.127 2.21.365c.616.248 1.137.66 1.636 1.159c.5.499.911 1.02 1.159 1.636c.238.6.375 1.274.365 2.21c-.01 1.16.002 1.54.002 4.48s-.01 3.32 0 4.48c.01.937-.127 1.61-.365 2.21c-.248.616-.66 1.137-1.159 1.636c-.499.5-1.02.911-1.159 1.636c-.238.6-.375 1.274-.365 2.21c.01-1.16-.002-1.54-.002-4.48s.01-3.32 0-4.48c-.01-.937.127-1.61.365-2.21c.248-.616.66-1.137 1.159-1.636c.499-.5 1.02-.911 1.636-1.159c.6-.238 1.274-.375 2.21-.365m-2.002 0c-3.11 0-3.5 0-4.71 0c-1.25.01-2.12.21-2.88.508c-.76.3-1.4.747-2.035 1.382c-.635.635-1.082 1.274-1.382 2.035c-.298.76-.507 1.63-.508 2.88c0 1.21 0 1.6 0 4.71s0 3.5 0 4.71c.01 1.25.21 2.12.508 2.88c.3.76.747 1.4 1.382 2.035c.635.635 1.274 1.082 2.035 1.382c.76.298 1.63.507 2.88.508c1.21 0 1.6 0 4.71 0s3.5 0 4.71 0c1.25-.01 2.12-.21 2.88-.508c.76-.3 1.4-.747 2.035-1.382c.635-.635 1.082-1.274 1.382-2.035c.298-.76.507-1.63.508-2.88c0-1.21 0-1.6 0-4.71s0-3.5 0-4.71c-.01-1.25-.21-2.12-.508-2.88c-.3-.76-.747-1.4-1.382-2.035c-.635-.635-1.274-1.082-2.035-1.382c-.76-.298-1.63-.507-2.88-.508c-1.21 0-1.6 0-4.71 0M17 12c0 2.76-2.24 5-5 5s-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5m-2 0c0-1.66-1.34-3-3-3s-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3M19.74 3.74c-.5-.5-.5-.5 0 0Z"/></svg>
-            </a>
-            <a href="#" class="footer-social-link" aria-label="Visit us on Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2H7"/></svg>
-            </a>
-            <a href="#" class="footer-social-link" aria-label="Visit us on Pinterest">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20.25c0 .356.126.69.34.965c.214.276.5.47.81.562c.31.092.635.076.94-.047c.305-.123.575-.353.765-.635a2.058 2.058 0 0 0 .685-1.455c-.015-.658-.335-1.25-.85-1.65c-.515-.4-1.185-.62-1.875-.62c-2.73 0-5.26-1.036-7.143-2.919C2.917 12.016 1.88 9.486 1.88 6.75c0-2.48 1.015-4.757 2.64-6.382c1.624-1.625 3.864-2.64 6.345-2.64c2.51 0 4.776 1.026 6.425 2.68c1.648 1.654 2.68 3.963 2.68 6.57c0 4.795-3.04 8.78-7.25 10.375c.19.46.29.98.27 1.515M17.2 9.2c0 2.22-1.88 4.02-4.2 4.02c-1.3 0-2.48-.6-3.26-1.58c.84.44 1.78.67 2.76.67c2.18 0 4.14-1.11 5.2-2.93c1.06-1.82 1.62-4.08 1.6-6.42c-.02-2.34-1.03-4.57-2.64-6.19C10.87-2.68 8.6-3.7 6.2-3.7C3.98-3.7 2.08-2.68.96-1.18c-1.12 1.5-1.6 3.6-1.4 5.7c.2 2.1 1.15 4.08 2.7 5.46c1.55 1.38 3.5 2.15 5.58 2.15c.6 0 1.18-.1 1.76-.28M12.8 17.75c1.47 0 2.94-.49 4.17-1.48c1.23-.99 2.1-2.37 2.45-3.92c-.52.2-1.07.3-1.64.3c-2.46 0-4.66-1.2-5.88-3.15c-1.22-1.95-1.74-4.32-1.52-6.68c.22-2.36 1.4-4.62 3.32-6.16c1.92-1.54 4.3-2.28 6.64-1.92c2.34.36 4.3 1.98 5.48 4.22c1.18 2.24 1.48 4.88.88 7.28c-.6 2.4-2.14 4.54-4.5 5.96c-2.36 1.42-5.18 1.94-7.82 1.52"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h4 class="footer-column-title">Quick Links</h4>
-          <ul class="footer-links-list">
-            <li><a href="#featured" class="footer-link">New Arrivals</a></li>
-            <li><a href="#collections" class="footer-link">Exclusive Collections</a></li>
-            <li><a href="#" class="footer-link">Gift Cards</a></li>
-            <li><a href="/admin.html" class="footer-link">Admin Panel</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h4 class="footer-column-title">Customer Care</h4>
-          <ul class="footer-links-list">
-            <li><a href="#" class="footer-link">Shipping & Returns</a></li>
-            <li><a href="#" class="footer-link">FAQ</a></li>
-            <li><a href="#" class="footer-link">Contact Us</a></li>
-            <li><a href="#" class="footer-link">Size Guide</a></li>
-          </ul>
-        </div>
-        <div class="footer-column footer-column--contact">
-          <h4 class="footer-column-title">Get in Touch</h4>
-          <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="footer-contact-icon"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7A2 2 0 0 1 5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l9 6l9-6"/></svg>
-              <span>hello@s-creations.co.za</span>
-            </li>
-            <li class="footer-contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="footer-contact-icon"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.4 7a4 4 0 0 0-5.8 0M3.1 9c.4 5.3 4.2 8.7 8.9 10c4.7-1.3 8.5-4.7 8.9-10M12 21v-8M12 3v3M6 18c-3-2.5-3-6.4 0-9M18 18c3-2.5 3-6.4 0-9M12 12a3 3 0 1 0 0-6a3 3 0 0 0 0 6"/></svg>
-              <span>Cape Town, South Africa</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- Newsletter Section -->
       <div class="footer-newsletter-section">
         <div class="footer-newsletter-content">
-          <h4 class="footer-newsletter-title">Join Our Newsletter</h4>
-          <p class="footer-newsletter-subtitle">Get the latest drops and exclusive discounts delivered right to your inbox.</p>
+          <h3 class="footer-newsletter-title">Stay Inspired.</h3>
+          <p class="footer-newsletter-subtitle">Get the latest news on collections and studio events.</p>
           <form class="footer-newsletter-form">
             <div class="footer-newsletter-input-group">
-              <input type="email" placeholder="Enter your email" class="footer-newsletter-input" required />
+              <input type="email" placeholder="Your email address" required class="footer-newsletter-input" />
               <button type="submit" class="btn btn-primary footer-newsletter-button">Subscribe</button>
             </div>
           </form>
@@ -220,7 +154,8 @@
       </div>
     </div>
   </footer>
-
+  
+  <!-- Link to main JavaScript file -->
   <script src="/js/main.js"></script>
 </body>
 </html>
