@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const cookieParser = require('cookie-parser'); // <--- NEW IMPORT
+const cookieParser = require('cookie-parser'); // <--- 1. NEW IMPORT
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -11,7 +11,7 @@ const checkoutRoutes = require('./routes/checkout');
 const cartRoutes = require('./routes/cart');
 
 // Import middleware (must be defined BEFORE use)
-const { protect } = require('./middleware/auth'); // ✅ Import protect
+const { protect } = require('./middleware/auth'); 
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,24 +21,24 @@ connectDB();
 
 // Define the allowed origin for CORS
 // MUST be the exact URL of your Netlify frontend
-const allowedOrigin = 'https://s-creations.netlify.app'; 
+const allowedOrigin = 'https://s-creations.netlify.app'; // <--- 2. CORRECT URL
 
 // Middleware
-// 1. Configure CORS to allow your frontend's origin
+// 3. Configure CORS to allow your frontend's origin and credentials
 app.use(cors({
   origin: allowedOrigin,
-  credentials: true // Crucial for sending authentication cookies/headers
+  credentials: true 
 }));
 
 app.use(express.json());
-// 2. Use cookie-parser
-app.use(cookieParser()); // <--- NEW USE
+// 4. Use cookie-parser middleware
+app.use(cookieParser()); 
 
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/checkout', checkoutRoutes);
-app.use('/api/cart', protect, cartRoutes); // ✅ Now protect is defined
+app.use('/api/cart', protect, cartRoutes); 
 
 // Health check
 app.get('/api/health', (req, res) => {
