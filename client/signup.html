@@ -14,7 +14,7 @@
         <h3>Create Account</h3>
         <p>Quick, secure, and tailored</p>
       </div>
-      <form id="signup-form">
+      <form id="signup-form"> 
         <div class="form-group">
           <label for="signup-name">Full Name</label>
           <input type="text" id="signup-name" name="name" required />
@@ -27,11 +27,12 @@
           <label for="signup-password">Password</label>
           <input type="password" id="signup-password" name="password" required />
         </div>
-        <div class="form-group form-group--checkbox">
-          <input type="checkbox" id="subscribe" name="subscribe" />
-          <label for="subscribe">Subscribe to studio notes & lookbooks</label>
+        <div class="form-group">
+          <label for="signup-confirm-password">Confirm Password</label>
+          <input type="password" id="signup-confirm-password" name="confirm-password" required />
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+        <p class="auth-footer-text">Already have an account? <a href="/login.html">Log In</a></p>
       </form>
     </div>
   </div>
