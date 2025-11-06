@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S-Creations - Where Fashion Meets Art</title>
+    <meta name="description" content="Discover handcrafted clothing, curated textiles, and studio-made accessories — designed for creatives who live color and craft.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">S-Creations</a>
+            
+            <ul class="nav-menu">
+                <li><a href="#clothing" class="nav-link">Clothing</a></li>
+                <li><a href="#arts-crafts" class="nav-link">Arts & Crafts</a></li>
+                <li><a href="#collections" class="nav-link">Collections</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div data-auth="unauthenticated">
+                    <a href="/login.html" class="btn btn-sm btn-outline">Login</a>
+                    <a href="/signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+                </div>
+                
+                <div data-auth="authenticated" class="user-nav" style="display: none;">
+                    <!-- User navigation will be populated by JavaScript -->
+                </div>
+                
+                <a href="/cart.html" class="cart-icon" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" style="display: none;"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>New Collection</span>
+            </div>
+            <h1 class="hero-title">Where Wearable Art Meets Everyday Wonder</h1>
+            <p class="hero-subtitle">
+                Discover handcrafted clothing, curated textiles, and studio-made accessories — 
+                designed for creatives who live color and craft.
+            </p>
+            <div class="hero-actions">
+                <a href="#featured" class="btn btn-primary btn-lg">Shop the Collection</a>
+                <a href="#collections" class="btn btn-outline btn-lg">Join the Atelier</a>
+            </div>
+        </div>
+        
+        <!-- Background elements -->
+        <div class="hero-background">
+            <div class="hero-shape-1"></div>
+            <div class="hero-shape-2"></div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Selections</h2>
+                <p class="section-subtitle">Curated for Creatives</p>
+            </div>
+            
+            <!-- Product Filters -->
+            <div class="filters">
+                <form class="filter-form">
+                    <select name="category">
+                        <option value="">All Categories</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="arts-crafts">Arts & Crafts</option>
+                        <option value="accessories">Accessories</option>
+                    </select>
+                    <select name="sortBy">
+                        <option value="createdAt">Newest</option>
+                        <option value="price">Price: Low to High</option>
+                        <option value="-price">Price: High to Low</option>
+                    </select>
+                </form>
+                
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search products...">
+                </div>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn btn-outline" onclick="loadMoreProducts()">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="collections" class="section" style="background: var(--color-surface-elevated);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore by Passion</h2>
+                <p class="section-subtitle">Find your creative expression</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card large">
+                    <div class="category-image">
+                        <img src="https://images.pexels.com/photos/7148008/pexels-photo-7148008.jpeg" alt="Clothing Design">
+                    </div>
+                    <div class="category-content">
+                        <h3>Clothing</h3>
+                        <p>Wearable Art Collection</p>
+                        <a href="#clothing" class="btn btn-outline">Explore</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.pexels.com/photos/7865828/pexels-photo-7865828.jpeg" alt="Arts & Crafts">
+                    </div>
+                    <div class="category-content">
+                        <h3>Arts & Crafts</h3>
+                        <p>Studio Finds & Supplies</p>
+                        <a href="#arts-crafts" class="btn btn-outline">Discover</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.pexels.com/photos/7764613/pexels-photo-7764613.jpeg" alt="Accessories">
+                    </div>
+                    <div class="category-content">
+                        <h3>Accessories</h3>
+                        <p>Statement Pieces</p>
+                        <a href="#accessories" class="btn btn-outline">Browse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); color: white;">
+        <div class="container">
+            <div class="text-center">
+                <h2>Join Our Creative Community</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">
+                    Get exclusive offers, new arrival alerts, and creative inspiration
+                </p>
+                <form class="newsletter-form" style="max-width: 400px; margin: 0 auto;">
+                    <div class="d-flex gap-2">
+                        <input type="email" placeholder="Enter your email" required style="flex: 1;">
+                        <button type="submit" class="btn btn-secondary">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>S-Creations</h3>
+                    <p>Where Fashion Meets Art. Discover unique pieces that tell a story of creativity and passion.</p>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">Pinterest</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="#clothing">Clothing</a></li>
+                        <li><a href="#arts-crafts">Arts & Crafts</a></li>
+                        <li><a href="#accessories">Accessories</a></li>
+                        <li><a href="#new-arrivals">New Arrivals</a></li>
+                        <li><a href="#sale">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns & Exchanges</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#size-guide">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>123 Creative Street<br>Art District, NY 10001</p>
+                    <p>hello@s-creations.com<br>+1 (234) 567-890</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 S-Creations. All rights reserved. Crafted with creativity and passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
