@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - S-Creations</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">S-Creations</a>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="#clothing" class="nav-link">Clothing</a></li>
+                <li><a href="#arts-crafts" class="nav-link">Arts & Crafts</a></li>
+                <li><a href="#collections" class="nav-link">Collections</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div data-auth="unauthenticated">
+                    <a href="/login.html" class="btn btn-sm btn-outline">Login</a>
+                </div>
+                
+                <div data-auth="authenticated" class="user-nav" style="display: none;">
+                    <!-- User navigation will be populated by JavaScript -->
+                </div>
+                
+                <a href="/cart.html" class="cart-icon" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" style="display: none;"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Details Section -->
+    <section class="section">
+        <div class="container">
+            <div id="product-details">
+                <!-- Product details will be loaded by JavaScript -->
+                <div class="text-center">
+                    <p>Loading product details...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="section" style="background: var(--color-surface-elevated);">
+        <div class="container">
+            <div class="section-title">
+                <h2>You Might Also Like</h2>
+                <p class="section-subtitle">Discover more creative pieces</p>
+            </div>
+            <div class="products-grid" id="related-products">
+                <!-- Related products will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // Product details page specific functionality
+        async function loadProductDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (!productId) {
+                document.getElementById('product-details').innerHTML = `
+                    <div class="text-center">
+                        <h2>Product Not Found</h2>
+                        <p>Sorry, we couldn't find the product you're looking for.</p>
+                        <a href="/" class="btn btn-primary">Back to Home</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const product = await apiFetch(`/products/${productId}`);
+                if (product) {
+                    renderProductDetails(product);
+                    loadRelatedProducts(product.category, productId);
+                }
+            } catch (error) {
+                document.getElementById('product-details').innerHTML = `
+                    <div class="text-center">
+                        <h2>Error Loading Product</h2>
+                        <p>Please try again later.</p>
+                        <a href="/" class="btn btn-primary">Back to Home</a>
+                    </div>
+                `;
+            }
+        }
+        
+        function renderProductDetails(product) {
+            const container = document.getElementById('product-details');
+            container.innerHTML = `
+                <div class="product-details-layout">
+                    <div class="product-gallery">
+                        <div class="main-image">
+                            <img src="${API_BASE}${product.images?.[0]?.url || '/images/placeholder.jpg'}" 
+                                 alt="${product.name}">
+                        </div>
+                        <div class="thumbnail-gallery">
+                            ${product.images?.map((image, index) => `
+                                <img src="${API_BASE}${image.url}" 
+                                     alt="${product.name}" 
+                                     onclick="changeMainImage(this.src)">
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="product-info">
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        <h1>${product.name}</h1>
+                        <div class="product-price">${formatPrice(product.price)}</div>
+                        
+                        <div class="product-description">
+                            <p>${product.description}</p>
+                        </div>
+                        
+                        ${product.inventory?.stock ? `
+                            <div class="stock-info">
+                                <span class="in-stock">In Stock (${product.inventory.stock} available)</span>
+                            </div>
+                        ` : '<div class="stock-info out-of-stock">Out of Stock</div>'}
+                        
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div class="quantity-controls">
+                                    <button onclick="updateQuantity(-1)">−</button>
+                                    <span id="quantity">1</span>
+                                    <button onclick="updateQuantity(1)">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons">
+                                <button class="btn btn-primary btn-lg" 
+                                        onclick="addToCart('${product._id}', getQuantity())"
+                                        ${!product.inventory?.stock ? 'disabled' : ''}>
+                                    Add to Cart
+                                </button>
+                                <button class="btn btn-outline btn-lg" onclick="toggleWishlist('${product._id}')">
+                                    Add to Wishlist
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-meta">
+                            <div class="meta-item">
+                                <strong>SKU:</strong> ${product.inventory?.sku || 'N/A'}
+                            </div>
+                            <div class="meta-item">
+                                <strong>Category:</strong> ${product.category}
+                            </div>
+                            ${product.tags?.length ? `
+                                <div class="meta-item">
+                                    <strong>Tags:</strong> ${product.tags.join(', ')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function changeMainImage(src) {
+            document.querySelector('.main-image img').src = src;
+        }
+        
+        function getQuantity() {
+            return parseInt(document.getElementById('quantity').textContent);
+        }
+        
+        function updateQuantity(change) {
+            const quantityElement = document.getElementById('quantity');
+            let quantity = parseInt(quantityElement.textContent);
+            quantity = Math.max(1, quantity + change);
+            quantityElement.textContent = quantity;
+        }
+        
+        async function loadRelatedProducts(category, excludeId) {
+            try {
+                const data = await apiFetch(`/products?category=${category}&limit=4`);
+                if (data) {
+                    const relatedProducts = data.products.filter(p => p._id !== excludeId).slice(0, 3);
+                    renderRelatedProducts(relatedProducts);
+                }
+            } catch (error) {
+                console.error('Failed to load related products:', error);
+            }
+        }
+        
+        function renderRelatedProducts(products) {
+            const container = document.getElementById('related-products');
+            if (!products.length) {
+                container.innerHTML = '<p>No related products found.</p>';
+                return;
+            }
+            
+            container.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-card__image">
+                        <img src="${API_BASE}${product.images?.[0]?.url || '/images/placeholder.jpg'}" 
+                             alt="${product.name}">
+                        ${product.badge ? `<div class="product-card__badge">${product.badge}</div>` : ''}
+                    </div>
+                    <div class="product-card__content">
+                        <h3 class="product-card__title">${product.name}</h3>
+                        <div class="product-card__price">${formatPrice(product.price)}</div>
+                        <div class="product-card__actions">
+                            <a href="/product-details.html?id=${product._id}" class="btn btn-sm btn-outline">
+                                View Details
+                            </a>
+                            <button class="btn btn-sm btn-primary" onclick="addToCart('${product._id}')">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize product details page
+        document.addEventListener('DOMContentLoaded', () => {
+            init().then(() => {
+                loadProductDetails();
+            });
+        });
+    </script>
+</body>
+</html>
