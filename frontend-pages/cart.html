@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - S-Creations</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav style="padding: 1rem; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" style="font-family: var(--font-family-heading); font-size: 1.5rem; font-weight: 800; color: var(--color-primary); text-decoration: none;">
+                S-Creations
+            </a>
+            <div>
+                <a href="/" class="btn btn-outline btn-sm">Continue Shopping</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="section">
+        <div class="container">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <h1 style="margin-bottom: 2rem;">Your Shopping Cart</h1>
+                
+                <div id="cart-page">
+                    <!-- Cart content will be loaded by JavaScript -->
+                </div>
+                
+                <!-- Guest Checkout Notice -->
+                <div data-auth="unauthenticated" class="card" style="margin-top: 2rem; background: #fff3cd; border-color: #ffeaa7;">
+                    <div class="card-body">
+                        <h4 style="color: #856404; margin-bottom: 0.5rem;">💡 Create an Account</h4>
+                        <p style="color: #856404; margin: 0;">
+                            Sign up for faster checkout, order tracking, and exclusive member benefits!
+                        </p>
+                        <div style="margin-top: 1rem;">
+                            <a href="/signup.html" class="btn btn-primary btn-sm">Create Account</a>
+                            <a href="/login.html" class="btn btn-outline btn-sm">Sign In</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" style="background: var(--color-surface-elevated);">
+        <div class="container">
+            <div class="text-center">
+                <h2>Why Shop With Us?</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🚚</div>
+                    <h4>Free Shipping</h4>
+                    <p>Free delivery on orders over $75</p>
+                </div>
+                <div class="text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">↩️</div>
+                    <h4>Easy Returns</h4>
+                    <p>30-day return policy for unused items</p>
+                </div>
+                <div class="text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🔒</div>
+                    <h4>Secure Payment</h4>
+                    <p>Your payment information is safe with us</p>
+                </div>
+                <div class="text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">💝</div>
+                    <h4>Member Rewards</h4>
+                    <p>Earn points with every purchase</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
